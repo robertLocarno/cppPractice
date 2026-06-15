@@ -8,10 +8,10 @@ echo -e "Building..."
 
 mkdir -p ./build/$(dirname $1)
 
-g++ $1.cpp -o ./build/"$1" -std=c++20 2>&1 | sed "s/^/$bar  /"
+g++ $1.cpp -o ./build/"$1" -std=c++20 -fsanitize=address 2>&1 | sed "s/^/$bar  /"
 
 echo -e "Build Done\r\n"
 
 echo -e "Running..."
-./build/$1 | sed "s/^/$bar  /"
+./build/$1 2>&1 | sed "s/^/$bar  /"
 echo -e "Run complete"
